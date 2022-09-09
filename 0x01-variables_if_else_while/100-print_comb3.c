@@ -11,13 +11,13 @@ int main(void)
 	int tens;
 	int ones;
 
-	for (tens = '0'; tens <= '9'; tens++) 
+	for (tens = '0'; tens <= '9'; tens++) /*increment tens*/
 	{
-		for (ones = '0'; ones <= '9'; ones++) 
+		for (ones = '0'; ones <= '9'; ones++) /*one's ten+1*/
 		{
 			putchar(tens);
 			putchar(ones);
-			if (!(tens == '9' && ones == '9')) 
+			if (!(tens == '9' && ones == '9')) /*print commas*/
 			{
 				putchar(',');
 				putchar(' ');
