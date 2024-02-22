@@ -1,25 +1,33 @@
+#include <stdio.h>
 #include "main.h"
 
 /**
- * print_diagonal - print character "\" n times
- * @n: number of characters to draw
- */
+*print_diagonal - prints a diagonal
+*@n: parameter
+*Return: returns nothing
+*/
 
 void print_diagonal(int n)
 {
-	int draw;
-	int space;
+	int len, space;
 
 	if (n > 0)
 	{
-		for (draw = 1; draw <= n; draw++)
+		for (len = 0; len < n; len++)
 		{
-			for (space = 1; space < draw; space++)
-				_putchar(' ');
-			_putchar('\\');
-			_putchar('\n');
+			for (space = 0; space < len; space++)
+			{
+				putchar(' ');
+			}
+
+			putchar('\\');
+
+			if (len == (n - 1))
+			{
+				continue;
+			}
+			putchar('\n');
 		}
 	}
-	else
-		_putchar('\n');
+	putchar('\n');
 }

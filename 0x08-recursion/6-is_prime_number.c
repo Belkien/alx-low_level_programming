@@ -1,30 +1,32 @@
 #include "main.h"
 
-int check_prime(int n, int resp);
 /**
- * is_prime_number - find prime numbers
- * @n: int
- * Return: int
+ * is_prime_number - returns the 1 if n is prime
+ * @n: number to be checked
+ *
+ * Return: 1 if n is prime, 0 otherwise
  */
 int is_prime_number(int n)
 {
-	return (check_prime(n, 2));
+	int start = n / 2;
+
+	if (n <= 1)
+		return (0);
+	return (is_prime(n, start));
 }
 
 /**
- * check_prime - check all number < n if they can divide it
- * @n: int
- * @resp: int
- * Return: int
+ * is_prime - returns the 1 if n is prime
+ * @n: number to be checked
+ * @start: number to start checking from
+ *
+ * Return: 1 if n is prime, 0 otherwise
  */
-
-int check_prime(int n, int resp)
+int is_prime(int n, int start)
 {
-
-if (resp >= n && n > 1)
-	return (1);
-else if (n % resp == 0 || n <= 1)
-	return (0);
-else
-	return (check_prime(n, resp + 1));
+	if (start <= 1)
+		return (1);
+	else if (n % start == 0)
+		return (0);
+	return (is_prime(n, start - 1));
 }

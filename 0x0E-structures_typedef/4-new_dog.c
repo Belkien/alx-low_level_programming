@@ -1,75 +1,39 @@
 #include "dog.h"
-#include <stdlib.h>
+#include <string.h>
 
 /**
- * new_dog - creates new dog
- * @name: name of dog
- * @age: age of dog
- * @owner: owner of dog
+ * new_dog - creates a new dog
+ * @name: name member of the dog
+ * @age: age member of the dog
+ * @owner: owner member of the dog
  *
- * Return: New dog
+ * Return: pointer to the new dog_t
  */
+
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	dog_t *new_dog;
-	int len_name, len_owner;
+	char *temp_name;
+	char *temp_owner;
+	dog_t *new_doggo;
 
-	new_dog = malloc(sizeof(dog_t));
-	if (new_dog == NULL)
-		return (NULL);
+	temp_name = malloc(sizeof(*name) * (strlen(name) + 1));
+	temp_owner = malloc(sizeof(*owner) * (strlen(owner) + 1));
+	new_doggo = malloc(sizeof(dog_t));
 
-	len_name = _strlen(name);
-	new_dog->name = malloc(sizeof(char) * len_name + 1);
-	if (new_dog->name == NULL)
+	if (temp_name && temp_owner && new_doggo)
 	{
-		free(new_dog);
+		strcpy(temp_name, name);
+		strcpy(temp_owner, owner);
+		new_doggo->name = temp_name;
+		new_doggo->age = age;
+		new_doggo->owner = temp_owner;
+	}
+	else
+	{
+		free(temp_name);
+		free(temp_owner);
+		free(new_doggo);
 		return (NULL);
 	}
-	new_dog->name = _strcpy(new_dog->name, name);
-	len_owner = _strlen(owner);
-	new_dog->owner = malloc(sizeof(char) * len_owner + 1);
-	if (new_dog->owner == NULL)
-	{
-		free(new_dog->name);
-		free(new_dog);
-		return (NULL);
-	}
-
-	new_dog->owner = _strcpy(new_dog->owner, owner);
-	new_dog->age = age;
-
-	return (new_dog);
-}
-/**
- * _strlen - determinates the lenght of a string
- * @s: pointer to string
- * Return: the length
- */
-int _strlen(char *s)
-{
-	int a;
-
-	for (a = 0; s[a] != '\0'; a++)
-	;
-	return (a);
-}
-
-/**
- * _strcpy - copies a pointed string
- * @dest: pointer to the destine string
- * @src: pointer to the source string
- * Return: the adress of the destiny string
- */
-char *_strcpy(char *dest, char *src)
-{
-	int a = 0;
-
-	while (src[a] != '\0')
-	{
-		dest[a] = src[a];
-		a++;
-	}
-
-	dest[a] = '\0';
-	return (dest);
+	return (new_doggo);
 }

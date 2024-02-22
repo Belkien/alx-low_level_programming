@@ -1,5 +1,1 @@
-/* don't show these files */
-
-*~
-*.o
-*.c
+_putchar.*

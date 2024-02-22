@@ -1,45 +1,52 @@
 #include "main.h"
-#include <stdio.h>
-
 /**
- * print_buffer - Prints a buffer 10 bytes at a time, starting with
- *                the byte position, then showing the hex content,
- *                then displaying printable charcaters.
- * @b: The buffer to be printed.
- * @size: The number of bytes to be printed from the buffer.
- */
-
+*print_buffer -  C function that prints the content of an
+*  inputted number of bytes from a buffer.
+* Prints 10 bytes per line.
+* Starts with the position of the first byte in hexadecimal (8 chars),
+* starting with `0`.
+* Each line shows the hexadecimal content (2 chars) of the buffer,
+* 2 bytes at a time, separated by a space.
+* Each line shows the content of the buffer.
+* Prints the byte if it is printable; if not, prints `.`.
+* Each line ends with a new line `\n`.
+* If the inputted byte size is 0 or less, the function only prints a new line.
+*@b: number of bytes
+*@size: size of the byte
+*/
 void print_buffer(char *b, int size)
 {
-	int byte, index;
+	int i = 0, j;
 
-	for (byte = 0; byte < size; byte += 10)
+	if (size < 0)
 	{
-		printf("%08x: ", byte);
+		printf('\n');
+		return;
+	}
 
-		for (index = 0; index < 10; index++)
+	while (i < size)
+	{
+		if (i % 10 == 0)
+			printf("%08x: ", i);
+		for (j = i; j < i + 9; j += 2)
 		{
-			if ((index + byte) >= size)
-				printf("  ");
+			if ((j < size) && ((j + 1) < size))
+				printf("%02x%02x: ", b[j], b[j + 1]);
 			else
-				printf("%02x", *(b + index + byte));
-			if ((index % 2) != 0 && index != 0)
+			{
+				while (++j <= i + 10)
+					printf(" ");
 				printf(" ");
+			}
 		}
-		for (index = 0; index < 10; index++)
+		for (j = i; j < i + 9 && j < size; j++)
 		{
-			if ((index + byte) >= size)
-				break;
-			else if (*(b + index + byte) >= 31 &&
-				 *(b + index + byte) <= 126)
-				printf("%c", *(b + index + byte));
+			if (b[j] >= 32 && b[j] <= 126)
+				printf("%c", b[j]);
 			else
 				printf(".");
 		}
-		if (byte >= size)
-			continue;
-		printf("\n");
+		printf('\n');
+		i += 10;
 	}
-	if (size <= 0)
-		printf("\n");
 }

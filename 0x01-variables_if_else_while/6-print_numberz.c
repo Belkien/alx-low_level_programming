@@ -1,20 +1,20 @@
 #include <stdio.h>
 
 /**
- *main - print 0123456789 using putchar
- *Return: Always 0 (Success)
- */
+* main - Entry point
+*
+* Return: returns 0 when everything works fine
+*
+*/
 
 int main(void)
 {
-	int n = '0';
+	int n;
 
-	while (n <= '9')
+	for (n = 48; n < 58; ++n)
 	{
 		putchar(n);
-		n++;
 	}
-	putchar('\n');
-
+	putchar(10);
 	return (0);
 }

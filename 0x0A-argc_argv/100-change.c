@@ -1,58 +1,50 @@
 #include <stdio.h>
 #include <stdlib.h>
-/**
- * isInteger - checks if s is an integer
- * @s: string to check
- * Return: 0 or 1
- */
-
-int isInteger(const char *s)
-{
-int i = 0;
-while (s[i] != '\0')
-{
-	if (s[i] < '0' || s[i] > '9')
-		return (0);
-	i++;
-}
-return (1);
-}
 
 /**
- * main - adds positive numbers
- * @argc: int
- * @argv: list
- * Return: 0
- */
+*main - prints the minimum number of coins to make change
+* for an amount of money
+*@argc: number of arguments
+*@argv: array of arguments
+*Return: returns 1 if there is an error; else returns 0
+*/
 
-int main(int argc, char const *argv[])
+int main(int argc, char *argv[])
 {
-int i = 0, coinUsed = 0, coin = 0;
-int coins[] = {25, 10, 5, 2, 1};
+int cents, coins = 0;
 
 if (argc != 2)
 {
 	printf("Error\n");
 	return (1);
 }
-if (isInteger(argv[1]))
+cents = atoi(argv[1]);
+while (cents > 0)
 {
-	i = atoi(argv[1]);
-	while (i > 0 && coin <= 4)
+	coins++;
+	if ((cents - 25) >= 0)
 	{
-		if (i >= coins[coin])
-		{
-			i -= coins[coin];
-			coinUsed++;
-		}
-		else
-		{
-			coin++;
-		}
+		cents -= 25;
+		continue;
 	}
+	if ((cents - 10) >= 0)
+	{
+		cents -= 10;
+		continue;
+	}
+	if ((cents - 5) >= 0)
+	{
+		cents -= 5;
+		continue;
+	}
+	if ((cents - 2) >= 0)
+	{
+		cents -= 2;
+		continue;
+	}
+	cents--;
 }
-
-printf("%i\n", coinUsed);
-
+printf("%d\n", coins);
 return (0);
 }
+

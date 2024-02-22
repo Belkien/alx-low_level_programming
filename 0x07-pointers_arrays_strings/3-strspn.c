@@ -1,25 +1,46 @@
+#include <stdio.h>
 #include "main.h"
 
 /**
- * _strspn - prints the consecutive caracters of s1 that are in s2.
- * @s: source string
- * @accept: searching string
+ * _strspn - gets the length of a prefix substring
+ * @s: string to be searched
+ * @accept: string to be used
  *
- * Return: new string.
+ * Return: number of bytes in the initial segment of s which are part of accept
  */
+
 unsigned int _strspn(char *s, char *accept)
 {
-	unsigned int i, j;
+	int i = 0;
+	int match = 0;
 
-	for (j = 0; *(s + j); j++)
+	while (s[i] != '\0')
 	{
-		for (i = 0; *(accept + i); i++)
-		{
-			if (*(s + j) == *(accept + i))
-				break;
-		}
-	if (*(accept + i) == '\0')
-		break;
+		if (_strchr(accept, s[i]) == NULL)
+			break;
+		match++;
+		i++;
 	}
-	return (j);
+
+	return (match);
+}
+
+/**
+ * _strchr - locates a char in a string
+ * @s: string to be searched
+ * @c: char to be checked
+ *
+ * Return: pointer to the first occurence of c in s
+ */
+
+char *_strchr(char *s, char c)
+{
+	int i = 0;
+
+	for (; s[i] != c && s[i] != '\0'; i++);
+
+	if (s[i] == c)
+		return (s + i);
+	else
+		return (NULL);
 }
